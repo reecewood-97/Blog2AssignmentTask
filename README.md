@@ -1,1 +1,2 @@
-# Blog2AssignmentTask
+# Blog2AssignmentTask 
+initial commit
