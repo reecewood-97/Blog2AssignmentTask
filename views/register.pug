@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-6
+        .card
+          .card-header
+            h3.text-center Register
+          .card-body
+            include ./partials/messages
+            form(action="/auth/register" method="POST")
+              .form-group
+                label(for="username") Username
+                input#username.form-control(type="text" name="username" placeholder="Enter username" required)
+              .form-group
+                label(for="email") Email
+                input#email.form-control(type="email" name="email" placeholder="Enter email" required)
+              .form-group
+                label(for="password") Password
+                input#password.form-control(type="password" name="password" placeholder="Enter password" required)
+              .form-group
+                label(for="password2") Confirm Password
+                input#password2.form-control(type="password" name="password2" placeholder="Confirm password" required)
+              button.btn.btn-primary.btn-block(type="submit") Register
+            hr
+            p Already have an account? 
+              a(href="/auth/login") Login here
+

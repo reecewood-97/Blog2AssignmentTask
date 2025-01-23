@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  .container.mt-5
+    .row
+      .col-md-12
+        h2.mb-4 Blog Statistics
+        .card
+          .card-body
+            .row
+              .col-md-6
+                .card.mb-3
+                  .card-body
+                    h5.card-title Total Posts
+                    p.card-text.h2= stats.totalPosts
+              .col-md-6
+                .card.mb-3
+                  .card-body
+                    h5.card-title Your Posts
+                    p.card-text.h2= stats.userPosts
+            
+            h4.mt-4.mb-3 Your Recent Posts
+            if stats.recentPosts && stats.recentPosts.length > 0
+              .list-group
+                each post in stats.recentPosts
+                  .list-group-item
+                    h5.mb-1= post.title
+                    small.text-muted Posted on #{new Date(post.createdAt).toLocaleDateString()}
+            else
+              p.text-muted You haven't created any posts yet.
+            
+            .mt-4
+              a.btn.btn-primary(href='/blog') Back to Posts

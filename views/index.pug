@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  .container
+    if user
+      h1 Welcome #{user.username}!
+    else
+      h1 Welcome to our Blog
+      p Please login or register to continue.
+
+
+    include partials/messages
+
+    form(action="/blog" method="get")
+      .input-group.mb-3
+        input(type="text" name="search" value=search class="form-control" placeholder="Search" aria-label="Search")
+        button(type="submit" class="btn btn-primary") Search
+
+    form(action="/blog" method="get" style="display:inline-block; margin-left: 10px;")
+      select(name="sort" class="form-select" onchange="this.form.submit()")
+        option(value="" disabled selected) Sort by
+        option(value="createdAt,ASC" selected=sort === 'createdAt,ASC' ? 'selected' : null) Date (Oldest first)
+        option(value="createdAt,DESC" selected=sort === 'createdAt,DESC' ? 'selected' : null) Date (Newest first)
+        option(value="title,ASC" selected=sort === 'title,ASC' ? 'selected' : null) Title (A-Z)
+        option(value="title,DESC" selected=sort === 'title,DESC' ? 'selected' : null) Title (Z-A)
+
+    if posts && posts.length
+      if search
+        p.mt-3.text-success Found #{posts.length} post(s) matching "#{search}"
+      if search
+        p.mt-3.text-success Found #{posts.length} post(s) matching "#{search}"
+      .row.mt-4
+        each post in posts
+          .col-md-6.mb-4
+            .card
+              .card-body
+                h5.card-title= post.title
+                p.card-text= post.content
+                if post.User
+                  small.text-muted Posted by #{post.User.username} on #{new Date(post.createdAt).toLocaleDateString()}
+                else
+                  small.text-muted Posted on #{new Date(post.createdAt).toLocaleDateString()}
+    else
+      if search
+        p.mt-4.text-warning No blog posts found matching "#{search}". Try a different search term.
+      else
+        p.mt-4 No blog posts yet.

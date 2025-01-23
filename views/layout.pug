@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/css/styles.css")
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      .container
+        a.navbar-brand(href="/blog") Blog with Express
+        button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNav")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbarNav
+          ul.navbar-nav.mr-auto
+            li.nav-item
+              a.nav-link(href="/blog") Home
+            if user
+              li.nav-item
+                a.nav-link(href="/blog/create") Create Post
+              li.nav-item
+                a.nav-link(href="/blog/stats") Stats
+          ul.navbar-nav
+            if user
+              li.nav-item
+                span.nav-link Welcome #{user.username}
+              li.nav-item
+                a.nav-link(href="/auth/logout") Logout
+            else
+              li.nav-item
+                a.nav-link(href="/auth/login") Login
+              li.nav-item
+                a.nav-link(href="/auth/register") Register
+    
+    .container.mt-4
+      include partials/messages
+      block content
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")

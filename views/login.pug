@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-6
+        .card
+          .card-header
+            h3.text-center Login
+          .card-body
+            include ./partials/messages
+            form(action="/auth/login" method="POST")
+              .form-group
+                label(for="username") Username
+                input#username.form-control(type="text" name="username" placeholder="Enter username" required)
+              .form-group
+                label(for="password") Password
+                input#password.form-control(type="password" name="password" placeholder="Enter password" required)
+              button.btn.btn-primary.btn-block(type="submit") Login
+            hr
+            p Don't have an account? 
+              a(href="/auth/register") Register here
